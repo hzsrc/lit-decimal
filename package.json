@@ -1,0 +1,29 @@
+{
+  "name": "lit-decimal",
+  "version": "1.0.1",
+  "description": "To fix js number issues, only 1kb. 精简版解决js中由于浮点数精度导致的各种数值不准确的问题。代码极简，压缩后仅1kb左右。",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "node test/index.js"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "keywords": [
+    "js",
+    "float",
+    "number",
+    "decimal",
+    "small"
+  ],
+  "author": {
+    "name": "James.Huang",
+    "email": "hz932@qq.com",
+    "url": "http://www.hz300.com/lit-decimal/"
+  },
+  "license": "MIT",
+  "readme": "README.md",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
+  "repository": "https://github.com/hzsrc/lit-decimal"
+}
