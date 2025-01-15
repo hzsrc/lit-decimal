@@ -17,4 +17,4 @@ console.log(new Decimal(666666666.166678).divide(786666666.2434523).add(6.669894
 ```
 
 ## 关于IE
-对于不支持BigInt的浏览器（如IE），也可以基本支持，多数情况下可得到正确结果。超大数值可能不准，如确有需要可引用：https://www.npmjs.com/package/bigint-polyfill。
+对于不支持BigInt的浏览器（如IE），也可以基本支持，多数情况下可得到正确结果。超大数值可能不准，如确有需要可引用：https://www.npmjs.com/package/bigint-polyfill 。
