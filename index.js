@@ -1,11 +1,10 @@
 //self.BigInt = undefined //模拟IE没有BigInt
 var prec = 16
 var precPow
-var BIG1 = BigInt(Number.MAX_SAFE_INTEGER)
-var BIG2 = BigInt(Number.MIN_SAFE_INTEGER)
+var BI
 if (typeof BigInt === 'undefined') {
     //IE没有BigInt，不支持大数。只能模拟一个，6位小数
-    self.BigInt = function (num) {
+    BI = function (num) {
         if (nInf(num)[1] > 6) num = Number(num.toFixed(6))
         return {
             valueOf() {
@@ -16,12 +15,16 @@ if (typeof BigInt === 'undefined') {
     prec = 0
     precPow = 1
 } else {
-    precPow = BigInt(Math.pow(10, prec))
+    BI = BigInt
+    precPow = BI(Math.pow(10, prec))
 }
+
+var BIG1 = BI(Number.MAX_SAFE_INTEGER)
+var BIG2 = BI(Number.MIN_SAFE_INTEGER)
 
 function Decimal(num, pointN) {
     var inf = nInf(num)
-    this.v = inf[1] > 0 ? BigInt(Math.round(inf[0] * Math.pow(10, inf[1]))) : BigInt(inf[0])
+    this.v = inf[1] > 0 ? BI(Math.round(inf[0] * Math.pow(10, inf[1]))) : BI(inf[0])
     this.pt = inf[1] + (pointN || 0) //小数点位置。比如2表示 this.v/100 才为实际值
 }
 
@@ -32,7 +35,7 @@ function nInf(num) {
 }
 
 function powN(n) {
-    return BigInt(Math.pow(10, n))
+    return BI(Math.pow(10, n))
 }
 
 function add(d1, d2, isAdd) {
@@ -68,18 +71,17 @@ Decimal.prototype = {
             var s = v.toString()
             if (s.indexOf('object') > -1) {
                 s = v.valueOf().toString() //IE
-                if (s.indexOf('e')) v = Number(s) //科学计数
+                if (s.indexOf('e'))
+                    return Number(s) / Math.pow(10, pt) //科学计数
             }
-            else {
-                var zeros = 0
-                for (var i = s.length - 1; i >= 0; i--) {
-                    if (s[i] === '0') zeros++
-                    else break
-                }
-                s = s.substring(0, s.length - zeros)
-                v = BigInt(s)
-                pt -= zeros
+            var zeros = 0
+            for (var i = s.length - 1; i >= 0; i--) {
+                if (s[i] === '0') zeros++
+                else break
             }
+            s = s.substring(0, s.length - zeros)
+            v = BI(s)
+            pt -= zeros
         }
         return Number(v) / Math.pow(10, pt)
     }

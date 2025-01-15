@@ -1,6 +1,6 @@
 {
   "name": "lit-decimal",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "To fix js number issues, only 1kb. 精简版解决js中由于浮点数精度导致的各种数值不准确的问题。代码极简，压缩后仅1kb左右。",
   "main": "src/index.js",
   "scripts": {

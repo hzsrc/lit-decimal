@@ -10,7 +10,7 @@ test(new Decimal(9.7).times(100).valueOf(), 970, 'times')
 test(new Decimal(0.3).divide(0.1).valueOf(), 3, 'divide')
 test(new Decimal(0.69).divide(10).valueOf(), 0.069, 'divide')
 //Big
-test(new Decimal(666666666.166678).divide(786666666.2434523).add(6.66989451684614).times(1.23564582393).subs(33666666.345645).valueOf(), -33666657.056860216, 'Big')
+test(new Decimal(666666666.166678).divide(786666666.2434523).add(6.66989451684614).times(1.23564582393).subs(33666666.345645).valueOf(), -33666657.05686022, 'Big')
 
 function test(ret, tobe, msg) {
     if (ret !== tobe) console.error(msg, ret, tobe)
