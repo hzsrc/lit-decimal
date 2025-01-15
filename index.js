@@ -53,14 +53,12 @@ Decimal.prototype = {
     times: function (num) {
         var d1 = this
         var d2 = new Decimal(num)
-        var r = d1.v * d2.v
-        return new Decimal(r, d1.pt + d2.pt)
+        return new Decimal(d1.v * d2.v, d1.pt + d2.pt)
     },
     divide: function (num) {
         var d1 = this
         var d2 = new Decimal(num)
-        var r = d1.v * precPow / d2.v
-        return new Decimal(r, prec + d1.pt - d2.pt)
+        return new Decimal(d1.v * precPow / d2.v, prec + d1.pt - d2.pt)
     },
     //还原为Number
     valueOf: function () {
@@ -68,8 +66,10 @@ Decimal.prototype = {
         var v = this.v
         if (v > BIG1 || v < BIG2) {
             var s = v.toString()
-            if (s.indexOf('object') > -1) s = v.valueOf().toString() //IE
-            if (s.indexOf('e')) v = Number(s) //科学计数
+            if (s.indexOf('object') > -1) {
+                s = v.valueOf().toString() //IE
+                if (s.indexOf('e')) v = Number(s) //科学计数
+            }
             else {
                 var zeros = 0
                 for (var i = s.length - 1; i >= 0; i--) {
